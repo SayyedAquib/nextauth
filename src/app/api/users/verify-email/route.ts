@@ -1,16 +1,14 @@
 import User from "@/models/userModel";
 import { NextRequest, NextResponse } from "next/server";
 import { connect } from "@/dbConfig/dbConfig";
-import bcryptjs from "bcryptjs";
-import { sendEmail } from "@/helpers/mailer";
 
 connect();
 
-export async function POST(request: NextRequest, response: NextResponse) {
+export async function POST(request: NextRequest) {
   try {
     const reqBody = await request.json();
     const { token } = reqBody;
-    console.log("token: " + token);
+    console.log("Verify email token: " + token);
 
     const user = await User.findOne({
       verifyToken: token,
