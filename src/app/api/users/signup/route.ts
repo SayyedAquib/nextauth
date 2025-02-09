@@ -9,8 +9,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
   try {
     const reqBody = await request.json();
     const { username, email, password } = reqBody;
-
-    console.log(reqBody);
+    console.log("signup reqBody", reqBody);
 
     const user = await User.findOne({ email });
 
@@ -26,7 +25,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
 
     const newUser = new User({ username, email, password: hashedPassword });
     const savedUser = await newUser.save();
-    console.log("saved user", savedUser);
+    console.log("signup saved user", savedUser);
 
     await sendEmail({ email, emailType: "VERIFY", userId: savedUser._id });
 

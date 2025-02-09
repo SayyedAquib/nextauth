@@ -2,6 +2,8 @@ import nodemailer from "nodemailer";
 import User from "@/models/userModel";
 import bcryptjs from "bcryptjs";
 
+
+
 export const sendEmail = async ({ email, emailType, userId }: any) => {
   try {
     // create a hased token
@@ -20,17 +22,16 @@ export const sendEmail = async ({ email, emailType, userId }: any) => {
     }
 
     const transport = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
+      host: process.env.MAIL_HOST,
+      port: Number(process.env.MAIL_PORT),
       auth: {
-        user: "3fd364695517df",
-        pass: "7383d58fd399cf",
-        //TODO: add these credentials to .env file
+        user: process.env.MAIL_USER,
+        pass: process.env.MAIL_PASS,
       },
     });
 
     const mailOptions = {
-      from: "hitesh@gmail.com",
+      from: "maintrap@gmail.com",
       to: email,
       subject:
         emailType === "VERIFY" ? "Verify your email" : "Reset your password",

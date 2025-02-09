@@ -19,7 +19,7 @@ export async function POST(request: NextRequest, response: NextResponse) {
         { status: 401 }
       );
     }
-    console.log("user: " + user);
+    console.log("logged in user: " + user);
 
     const validPassword = await compare(password, user.password)
 

@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
         { status: 401 }
       );
     }
-    console.log("user: " + user);
+    console.log("verify email user: " + user);
 
     user.isVarified = true;
     user.verifyToken = undefined;
